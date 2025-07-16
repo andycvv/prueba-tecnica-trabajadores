@@ -18,7 +18,7 @@ namespace backend_myper.Data
         }
         public virtual DbSet<Departamento> Departamentos { get; set; }
         public virtual DbSet<Distrito> Distritos { get; set; }
-        public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Provincia> Provincias { get; set; }
         public virtual DbSet<Trabajador> Trabajadores { get; set; }
     }
 }
