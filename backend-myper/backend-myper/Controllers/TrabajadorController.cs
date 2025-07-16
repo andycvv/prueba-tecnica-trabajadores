@@ -77,5 +77,27 @@ namespace backend_myper.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtRoute("obtenerTrabajadorPorId", new { id = trabajador.Id }, dto);
         }
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Put(int id, [FromBody] TrabajadorCreacionDTO dto)
+        {
+            var trabajador = await _context.Trabajadores.FirstOrDefaultAsync(t => t.Id == id);
+
+            if (trabajador is null)
+            {
+                return NotFound();
+            }
+
+            trabajador.NumeroDocumento = dto.NumeroDocumento;
+            trabajador.TipoDocumento = dto.TipoDocumento;
+            trabajador.Nombres = dto.Nombres;
+            trabajador.Sexo = dto.Sexo;
+            trabajador.DepartamentoId = dto.DepartamentoId;
+            trabajador.ProvinciaId = dto.ProvinciaId;
+            trabajador.DistritoId = dto.DistritoId;
+
+            _context.Update(trabajador);
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
