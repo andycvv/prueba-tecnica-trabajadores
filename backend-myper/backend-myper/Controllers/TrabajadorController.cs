@@ -31,5 +31,32 @@ namespace backend_myper.Controllers
                     Provincia = t.Provincia.NombreProvincia
                 }).ToListAsync();
         }
+        [HttpGet("{id:int}", Name = "obtenerTrabajadorPorId")]
+        public async Task<ActionResult<TrabajadorDTO>> GetById(int id)
+        {
+            var trabajador = await _context.Trabajadores
+                .Include(t => t.Departamento)
+                .Include(t => t.Provincia)
+                .Include(t => t.Distrito)
+                .Select(t => new TrabajadorDTO
+                {
+                    Id = t.Id,
+                    TipoDocumento = t.TipoDocumento,
+                    NumeroDocumento = t.NumeroDocumento,
+                    Nombres = t.Nombres,
+                    Sexo = t.Sexo,
+                    Departamento = t.Departamento.NombreDepartamento,
+                    Distrito = t.Distrito.NombreDistrito,
+                    Provincia = t.Provincia.NombreProvincia
+                })
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (trabajador is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(trabajador);
+        }
     }
 }
