@@ -18,3 +18,14 @@ export interface TrabajadorCreacionDTO {
   provinciaId: number;
   distritoId: number;
 }
+
+export interface TrabajadorEditarDTO {
+  id: number;
+  tipoDocumento: string;
+  numeroDocumento: string;
+  nombres: string;
+  sexo: string;
+  departamentoId: number;
+  provinciaId: number;
+  distritoId: number;
+}

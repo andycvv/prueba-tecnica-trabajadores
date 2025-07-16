@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { TrabajadorCreacionDTO, TrabajadorDTO } from './trabajador.interface';
+import { TrabajadorCreacionDTO, TrabajadorDTO, TrabajadorEditarDTO } from './trabajador.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class TrabajadorService {
   }
 
   public getById(id: number) {
-    return this.http.get<TrabajadorDTO[]>(`${this.baseUrl}/${id}`);
+    return this.http.get<TrabajadorEditarDTO>(`${this.baseUrl}/${id}`);
   }
 
   public create(trabajador: TrabajadorCreacionDTO) {
