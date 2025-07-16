@@ -39,16 +39,16 @@ namespace backend_myper.Controllers
                 .Include(t => t.Departamento)
                 .Include(t => t.Provincia)
                 .Include(t => t.Distrito)
-                .Select(t => new TrabajadorDTO
+                .Select(t => new TrabajadorEditarDTO
                 {
                     Id = t.Id,
                     TipoDocumento = t.TipoDocumento,
                     NumeroDocumento = t.NumeroDocumento,
                     Nombres = t.Nombres,
                     Sexo = t.Sexo,
-                    Departamento = t.Departamento.NombreDepartamento,
-                    Distrito = t.Distrito.NombreDistrito,
-                    Provincia = t.Provincia.NombreProvincia
+                    DepartamentoId = t.Departamento.Id,
+                    DistritoId = t.Distrito.Id,
+                    ProvinciaId = t.Provincia.Id
                 })
                 .FirstOrDefaultAsync(t => t.Id == id);
 
