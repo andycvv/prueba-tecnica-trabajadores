@@ -1,0 +1,94 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{modo === 'crear' ? 'Crear trabajador' : 'Editar trabajador'}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formulario">
+          <div class="row mb-3">
+            <label for="tipoDocumento" class="col-sm-4 col-form-label">Tipo Documento</label>
+            <div class="col-sm-8">
+              <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento">
+                <option value="DNI">DNI</option>
+                <option value="PSP">PSP</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="numeroDocumento" class="col-sm-4 col-form-label">Número Documento</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="numeroDocumento" formControlName="numeroDocumento" />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="nombres" class="col-sm-4 col-form-label">Nombres</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="nombres" formControlName="nombres" />
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">Sexo</label>
+            <div class="col-sm-8">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="masculino" formControlName="sexo" value="M" />
+                <label class="form-check-label" for="masculino">Masculino</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="femenino" formControlName="sexo" value="F" />
+                <label class="form-check-label" for="femenino">Femenino</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="departamentoId" class="col-sm-4 col-form-label">Departamento</label>
+            <div class="col-sm-8">
+              <select class="form-select" id="departamentoId" formControlName="departamentoId">
+                <option [value]="0">Selecciona un departamento</option>
+                @for (departamento of departamentos; track departamento.id) {
+                  <option [value]="departamento.id">{{departamento.nombreDepartamento}}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="provinciaId" class="col-sm-4 col-form-label">Provincia</label>
+            <div class="col-sm-8">
+              <select class="form-select" id="provinciaId" formControlName="provinciaId">
+                <option [value]="0">Selecciona una provincia</option>
+                @for (provincia of provincias; track provincia.id) {
+                  <option [value]="provincia.id">{{provincia.nombreProvincia}}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <label for="distritoId" class="col-sm-4 col-form-label">Distrito</label>
+            <div class="col-sm-8">
+              <select class="form-select" id="distritoId" formControlName="distritoId">
+                <option [value]="0">Selecciona un distrito</option>
+                @for (distrito of distritos; track distrito.id) {
+                  <option [value]="distrito.id">{{distrito.nombreDistrito}}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="guardar()" [disabled]="formulario.invalid">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
