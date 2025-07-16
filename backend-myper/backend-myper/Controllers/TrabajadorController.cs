@@ -99,5 +99,19 @@ namespace backend_myper.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var registrosBorrados = await _context.Trabajadores
+                .Where(t => t.Id == id)
+                .ExecuteDeleteAsync();
+
+            if (registrosBorrados == 0)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
     }
 }
