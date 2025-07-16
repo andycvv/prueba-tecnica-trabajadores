@@ -1,6 +1,23 @@
 <h3 class="text-center my-4">Listado de trabajadores</h3>
 
-<button class="btn btn-primary mb-3">Nuevo Registro</button>
+<button 
+  class="btn btn-primary mb-3" 
+  (click)="abrirModalCrear()"
+>
+  Nuevo Registro
+</button>
+
+<div class="row mb-3">
+  <div class="col-sm-4">
+    <label for="filtroSexo" class="form-label">Filtrar por sexo</label>
+    <select id="filtroSexo" class="form-select" [(ngModel)]="filtroSexo" (change)="filtrarTrabajadores()">
+      <option value="">Todos</option>
+      <option value="M">Masculino</option>
+      <option value="F">Femenino</option>
+    </select>
+  </div>
+</div>
+
 
 <table class="table border border-2">
   <thead>
@@ -17,19 +34,25 @@
   </thead>
   <tbody>
     @for (trabajador of trabajadoresFiltrados; track trabajador.id) {
-      <tr [classList]="trabajador.sexo === 'F' ? 'table-warning' : 'table-primary'">
-        <th>{{trabajador.tipoDocumento}}</th>
-        <td>{{trabajador.numeroDocumento}}</td>
-        <td>{{trabajador.nombres}}</td>
-        <td>{{trabajador.sexo}}</td>
-        <td>{{trabajador.departamento}}</td>
-        <td>{{trabajador.provincia}}</td>
-        <td>{{trabajador.distrito}}</td>
-        <td>
-          <a class="btn btn-warning me-2">Editar</a>
-          <button class="btn btn-danger">Eliminar</button>
-        </td>
-      </tr>
+    <tr [classList]="trabajador.sexo === 'F' ? 'table-warning' : 'table-primary'">
+      <th>{{trabajador.tipoDocumento}}</th>
+      <td>{{trabajador.numeroDocumento}}</td>
+      <td>{{trabajador.nombres}}</td>
+      <td>{{trabajador.sexo}}</td>
+      <td>{{trabajador.departamento}}</td>
+      <td>{{trabajador.provincia}}</td>
+      <td>{{trabajador.distrito}}</td>
+      <td>
+        <a class="btn btn-warning me-2" (click)="abrirModalEditar(trabajador.id)">Editar</a>
+        <button class="btn btn-danger" (click)="eliminar(trabajador.id)">Eliminar</button>
+      </td>
+    </tr>
     }
   </tbody>
 </table>
+
+<app-modal-formulario
+  [modo]="modoFormulario"
+  [trabajadorEditar]="trabajadorSeleccionado!"
+  (guardarCambios)="actualizarLista()"
+/>
