@@ -1,0 +1,31 @@
+# === .NET ===
+**/bin/
+**/obj/
+**/*.user
+**/*.suo
+*.db
+*.sqlite
+*.log
+*.vs/
+*.vscode/
+
+# ASP.NET secrets
+**/secrets.json
+
+# Entity Framework
+Migrations/
+
+# Rider/JetBrains
+.idea/
+
+# === Angular ===
+node_modules/
+dist/
+.angular/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# === General ===
+.DS_Store
+Thumbs.db
