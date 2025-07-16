@@ -14,6 +14,16 @@ builder.Services.AddDbContext<AppDbContext>(app =>
 {
     app.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(corsOptions =>
+    {
+        corsOptions
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -24,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
