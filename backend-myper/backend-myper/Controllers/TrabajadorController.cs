@@ -1,5 +1,6 @@
 ﻿using backend_myper.Data;
 using backend_myper.DTOs;
+using backend_myper.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -57,6 +58,24 @@ namespace backend_myper.Controllers
             }
 
             return Ok(trabajador);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] TrabajadorCreacionDTO dto)
+        {
+            var trabajador = new Trabajador
+            {
+                TipoDocumento = dto.TipoDocumento,
+                NumeroDocumento = dto.NumeroDocumento,
+                Nombres = dto.Nombres,
+                Sexo = dto.Sexo,
+                DepartamentoId = dto.DepartamentoId,
+                ProvinciaId = dto.ProvinciaId,
+                DistritoId = dto.DistritoId
+            };
+
+            _context.Add(trabajador);
+            await _context.SaveChangesAsync();
+            return CreatedAtRoute("obtenerTrabajadorPorId", new { id = trabajador.Id }, dto);
         }
     }
 }
