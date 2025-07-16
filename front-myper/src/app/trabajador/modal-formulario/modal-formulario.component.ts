@@ -77,4 +77,16 @@ export class ModalFormularioComponent implements OnInit, OnChanges {
       })
     }
   }
+
+  resetFormulario() {
+    this.formulario.reset({
+      tipoDocumento: 'DNI',
+      numeroDocumento: '',
+      nombres: '',
+      sexo: '',
+      departamentoId: 0,
+      provinciaId: 0,
+      distritoId: 0
+    });
+  }
 }
